@@ -20,9 +20,9 @@ export LANG
 InputVar=$*
 HomeDir="/tmp/autonginx"
 NginxPkg='nginx-1.2.7'
-DependPkg=' gcc gcc-c++ make automake autoconf patch libtool fontconfig-devel freetype-devel libjpeg-devel libpng-devel libXpm-devel gettext-devel libmcrypt-devel mhash-devel mysql-devel openssl-devel zlib-devel libxml2-devel pcre-devel'
+DependPkg=' gcc gcc-c++ make automake autoconf patch libtool fontconfig-devel freetype-devel libjpeg-devel libpng-devel libXpm-devel gettext-devel libmcrypt-devel mhash-devel mysql-devel openssl-devel zlib-devel libxml2-devel pcre-devel perl-ExtUtils-Embed'
 
-if [ -z $InputVar ]; then
+if [ ! -z $InputVar ]; then
     Para=${InputVar}
 else
     Para=' --prefix=/usr/local/nginx/ --user=nginxur --group=nginxgp --with-http_ssl_module --with-http_realip_module --with-http_stub_status_module --with-http_perl_module --with-http_flv_module --with-http_gzip_static_module --with-md5-asm --with-md5=/usr/include --with-sha1-asm --with-sha1=/usr/include --without-mail_pop3_module --without-mail_imap_module --without-mail_smtp_module'
