@@ -22,7 +22,6 @@ HomeDir="/tmp/autonginx"
 NginxPkg='nginx-1.2.7'
 DependPkg=' gcc gcc-c++ make automake autoconf patch libtool fontconfig-devel freetype-devel libjpeg-devel libpng-devel libXpm-devel gettext-devel libmcrypt-devel mhash-devel mysql-devel openssl-devel zlib-devel libxml2-devel pcre-devel'
 
-##
 if [ -z $InputVar ]; then
     Para=${InputVar}
 else
@@ -81,16 +80,14 @@ function _header() {
 	printf " o----------------------------------------------------------------o\n"	
 }
 
-##Program Function
-
 ################ Main ################
 clear
 _info_msg
 
-#if [ `id -u` != "0" ]; then
-#echo -e "You need to be be the root user to run this script.\nWe also suggest you use a direct root login, not su -, sudo etc..."
-#exit 1
-#fi
+if [ `id -u` != "0" ]; then
+echo -e "You need to be be the root user to run this script.\nWe also suggest you use a direct root login, not su -, sudo etc..."
+exit 1
+fi
 
 if [ ! -d $HomeDir ]; then
 	mkdir -p $HomeDir
@@ -110,6 +107,6 @@ make install
 ln -s /usr/local/nginx/sbin/nginx /usr/sbin/
 echo "/usr/local/nginx/sbin/nginx" >> /etc/rc.d/rc.local
 
-#_end_msg
+_end_msg
 ############  Clean Cache  ############
 rm -rf ${HomeDir}
