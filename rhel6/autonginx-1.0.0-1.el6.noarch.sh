@@ -17,9 +17,17 @@ export LANG
 
 ################ Var Setting ################
 
+InputVar=$*
 HomeDir="/tmp/autonginx"
 NginxPkg='nginx-1.2.7'
-Para=' --prefix=/usr/local/nginx/ --user=nginxur --group=nginxgp --with-http_ssl_module --with-http_realip_module --with-http_stub_status_module --with-http_perl_module --with-http_flv_module --with-http_gzip_static_module --with-md5-asm --with-md5=/usr/include --with-sha1-asm --with-sha1=/usr/include --without-mail_pop3_module --without-mail_imap_module --without-mail_smtp_module'
+DependPkg=' gcc gcc-c++ make automake autoconf patch libtool fontconfig-devel freetype-devel libjpeg-devel libpng-devel libXpm-devel gettext-devel libmcrypt-devel mhash-devel mysql-devel openssl-devel zlib-devel libxml2-devel pcre-devel'
+
+##
+if [ -z $InputVar ]; then
+    Para=${InputVar}
+else
+    Para=' --prefix=/usr/local/nginx/ --user=nginxur --group=nginxgp --with-http_ssl_module --with-http_realip_module --with-http_stub_status_module --with-http_perl_module --with-http_flv_module --with-http_gzip_static_module --with-md5-asm --with-md5=/usr/include --with-sha1-asm --with-sha1=/usr/include --without-mail_pop3_module --without-mail_imap_module --without-mail_smtp_module'
+fi
 
 ################ Func Define ################ 
 function _info_msg() {
@@ -46,7 +54,7 @@ clear
 function _end_msg() {
 echo -e "###################################################################"
 echo ""
-echo -e "   Soft Info"
+echo -e "                         Install Finish :)"
 echo ""
 echo -e "###################################################################"
 echo ""
@@ -90,8 +98,7 @@ fi
 
 cd $HomeDir || exit 1
 
-yum -y install gcc gcc-c++ make automake autoconf patch libtool fontconfig-devel freetype-devel libjpeg-devel libpng-devel libXpm-devel gettext-devel libmcrypt-devel mhash-devel mysql-devel openssl-devel zlib-devel libxml2-devel pcre-devel
-
+yum -y install ${DependPkg}
 wget http://nginx.org/download/${NginxPkg}.tar.gz
 tar xzvf ${NginxPkg}.tar.gz
 cd $NginxPkg
